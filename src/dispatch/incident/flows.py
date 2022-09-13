@@ -489,7 +489,7 @@ def create_conversation(incident: Incident, db_session: SessionLocal):
     plugin = plugin_service.get_active_instance(
         db_session=db_session, project_id=incident.project.id, plugin_type="conversation"
     )
-    incident_channel_name = datetime.datetime.now().strftime("%Y%m%d") + "-" +title.replace(" ", "-")[:40]
+    incident_channel_name = datetime.now().strftime("%Y%m%d") + "-" +title.replace(" ", "-")[:40]
     conversation = plugin.instance.create(incident_channel_name)
     conversation.update({"resource_type": plugin.plugin.slug, "resource_id": conversation["name"]})
 
